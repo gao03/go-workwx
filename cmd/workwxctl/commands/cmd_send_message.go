@@ -3,8 +3,6 @@ package commands
 import (
 	"fmt"
 
-	"github.com/urfave/cli/v2"
-
 	"github.com/xen0n/go-workwx"
 )
 
@@ -71,7 +69,7 @@ func cmdSendMessage(c *cli.Context) error {
 			isSafe,
 		)
 	case "news":
-		err = app.SendNewsMessage(
+		err = app.SendMutipleNewsMessage(
 			&recipient,
 			title,
 			description,

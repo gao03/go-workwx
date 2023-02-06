@@ -116,6 +116,30 @@ func (c *WorkwxApp) SendTextCardMessage(
 	)
 }
 
+type NewsMessageArticle struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	URL         string `json:"url"`
+	Picurl      string `json:"picurl"`
+}
+
+// SendMultipleNewsMessage 发送多条图文消息
+//
+// 收件人参数如果仅设置了 `ChatID` 字段，则为【发送消息到群聊会话】接口调用；
+// 否则为单纯的【发送应用消息】接口调用。
+func (c *WorkwxApp) SendMultipleNewsMessage(
+	recipient *Recipient,
+	articles []NewsMessageArticle,
+	isSafe bool,
+) error {
+	return c.sendMessage(
+		recipient,
+		"news",
+		map[string]interface{}{"articles": articles},
+		isSafe,
+	)
+}
+
 // SendNewsMessage 发送图文消息
 //
 // 收件人参数如果仅设置了 `ChatID` 字段，则为【发送消息到群聊会话】接口调用；
